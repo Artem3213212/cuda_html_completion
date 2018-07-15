@@ -2,6 +2,9 @@ import os,re
         
 REGEX_PICS='.*\\.(png|bmp|gif|ico|jpg|jpeg)'
 REGEX_SRC='.*<\\s*img\\s+(.*\\s+|)src='
+
+PREFIX_FILE = 'image'
+PREFIX_DIR = 'folder'
         
 def get_folder_items(path,old_path,reg):
     s=os.path.dirname(old_path)
@@ -28,11 +31,11 @@ def get_folder_items(path,old_path,reg):
     lsD.sort()
     lsF.sort()
     for i in lsD:
-        s=s+'|'+i+os.path.sep+chr(13)
+        s=s+PREFIX_DIR+'|'+i+os.path.sep+chr(13)
     for i in lsF:
-        s=s+'|'+i+chr(13)
+        s=s+PREFIX_FILE+'|'+i+chr(13)
     if('..'+os.path.sep).startswith(start):
-        s='|..'+os.path.sep+chr(13)+s
+        s=PREFIX_DIR+'|..'+os.path.sep+chr(13)+s
     return [s,z]
     
 def imgcomplete_on_complete(ed):
