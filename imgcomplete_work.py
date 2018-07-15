@@ -31,12 +31,11 @@ def get_folder_items(path,old_path,reg):
             l_files.append(i.name)
     l_dirs.sort()
     l_files.sort()
+    l_dirs.insert(0,'..')
     for i in l_dirs:
         s=s+PREFIX_DIR+'|'+i+os.path.sep+chr(13)
     for i in l_files:
         s=s+PREFIX_FILE+'|'+i+chr(13)
-    if('..'+os.path.sep).startswith(start):
-        s=PREFIX_DIR+'|..'+os.path.sep+chr(13)+s
     return [s,z]
     
 def imgcomplete_on_complete(ed):
