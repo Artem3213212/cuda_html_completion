@@ -14,6 +14,8 @@ def get_folder_items(path,old_path,reg):
     s=''
     if folder=='':
         folder='.'
+    if not os.path.isdir(folder):
+        return False
     lsD=[]
     lsF=[]
     for i in os.scandir(folder):
@@ -35,7 +37,7 @@ def get_folder_items(path,old_path,reg):
     
 def imgcomplete_on_complete(ed):
     carets = ed.get_carets()
-    if len(carets)>1:
+    if len(carets)!=1:
         return False
     x,y,x1,y2=carets[0]
     s=ed.get_text_line(y)[:x]
@@ -45,8 +47,9 @@ def imgcomplete_on_complete(ed):
             for i in range(len(s)-1,-1,-1):
                 if s[i]=='"':
                     temp=get_folder_items(file_dir,s[i+1:],REGEX_PICS)
-                    ed.complete(temp[0],temp[1],0)
-                    return True
+                    if temp:
+                        ed.complete(temp[0],temp[1],0)
+                        return True
         except:
             pass
     if re.fullmatch(REGEX_SRC+"'[^']*",s):
@@ -54,8 +57,9 @@ def imgcomplete_on_complete(ed):
             for i in range(len(s)-1,-1,-1):
                 if s[i]=="'":
                     temp=get_folder_items(file_dir,s[i+1:],REGEX_PICS)
-                    ed.complete(temp[0],temp[1],0)
-                    return True
+                    if temp:
+                        ed.complete(temp[0],temp[1],0)
+                        return True
         except:
             pass
     return False
