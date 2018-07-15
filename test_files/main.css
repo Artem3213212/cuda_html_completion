@@ -1,34 +1,18 @@
 body {
   background-color: #586b9e;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  text-align: center;
 }
 
-a img {border: none; }
-
-table tbody tr td a {
-  display: block;
-  text-decoration:none;
-}
-
-.rounded {
+.class_one {
   padding-top: 8px;
   padding-bottom: 15px;
   margin: 0 auto 20px auto;
-  background: #eeeeee;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  color: #707070;
   }
   
-.footer {
+.class_two {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 30px;
-  width: 100%;
 }
 
 #id_one {
