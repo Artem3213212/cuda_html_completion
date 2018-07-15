@@ -2,17 +2,13 @@
 2018.07.16
 + merged two plugins: 
   old HTML Class Complete + 
-  new HTML Filenames Complete, which handles <img src="|"> file names
+  new HTML Filenames Complete, which handles <img src="|">
 + added test_files folder
 
 2018.07.12
 + code refactored
 + supported PHP lexer and other "HTML nnnnnn" lexers
 + new readme.txt
-
-2016.01
-+ add: completion-list replaces right part of word
-- fix: plugin breaks usual HTML completion
 
 2015.10
 initial
