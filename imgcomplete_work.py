@@ -40,17 +40,23 @@ def get_folder_items(path,old_path,reg):
     
 def imgcomplete_on_complete(ed):
 
-    carets = ed.get_carets()
+    carets=ed.get_carets()
     if len(carets)!=1:
         return False
-    x,y,x1,y2=carets[0]
-    s=''
-    for i in range(max(0,y-TAG_LINES),y):
-        s=s+ed.get_text_line(i)
-    s=s+ed.get_text_line(y)[:x]
-    file_dir=os.path.dirname(ed.get_filename())
+
+    fname=ed.get_filename()
+    if not fname:
+        return False
+    file_dir=os.path.dirname(fname)
     if not os.path.isdir(file_dir):
         return False
+        
+    x,y,x1,y1=carets[0]
+    s=''
+    # add n prev lines, support complex tags
+    for i in range(max(0,y-TAG_LINES),y):
+        s+=ed.get_text_line(i)
+    s+=ed.get_text_line(y)[:x]
     
     if re.fullmatch(REGEX_SRC+'"[^"]*',s,re.I):
         try:
