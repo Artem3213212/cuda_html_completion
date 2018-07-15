@@ -1,5 +1,4 @@
 import os,re
-
         
 def get_folder_items(path,old_path,reg):
     s=os.path.dirname(old_path)
@@ -33,10 +32,19 @@ def imgcomplete_on_complete(ed):
     x,y,x1,y2=carets[0]
     s=ed.get_text_line(y)[:x]
     file_dir=os.path.dirname(ed.get_filename())
-    if re.match('''.*<\\s*img\\s+(.*\\s+|)src="[^"]*''',s):
+    if re.match('.*<\\s*img\\s+(.*\\s+|)src="[^"]*',s):
         try:
             for i in range(len(s)-1,-1,-1):
                 if s[i]=='"':
+                    temp=get_folder_items(file_dir,s[i+1:],'.*\\.(png|bmp)')
+                    ed.complete(temp[0],temp[1],0)
+                    return True
+        except:
+            pass
+    if re.match(".*<\\s*img\\s+(.*\\s+|)src='[^']*",s):
+        try:
+            for i in range(len(s)-1,-1,-1):
+                if s[i]=="'":
                     temp=get_folder_items(file_dir,s[i+1:],'.*\\.(png|bmp)')
                     ed.complete(temp[0],temp[1],0)
                     return True
