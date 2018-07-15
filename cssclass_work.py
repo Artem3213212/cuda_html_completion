@@ -76,7 +76,7 @@ def cssclass_on_complete(ed):
     is_quote = quote in ['"', "'"]
     if not is_quote:
         if quote != '=':
-            return False
+            return
         is_quote = True
         quote = '"'
         ed.insert(posx, posy, quote)
@@ -97,22 +97,22 @@ def cssclass_on_complete(ed):
     is_work_id = last_text.upper() == need_text.upper()
         
     if not (is_work_class or is_work_id):
-        return False
+        return
 
     text = ed.get_text_all()
     text_css = get_css_text(text)
     if not text_css:
-        return False
+        return
             
     tagname = csswork.html_find_tagname(ed.get_text_line(posy), posx)
     if not tagname:
         if LOG: print('tag not found')
-        return False
+        return
     if LOG: print('tag:', tagname)
         
     acp_list = csswork.css_find_classes(text_css, tagname, is_work_class)
     if not acp_list:
-        return False
+        return
 
     len2 = 0
     posx, posy, endx, endy = ed.get_carets()[0]
