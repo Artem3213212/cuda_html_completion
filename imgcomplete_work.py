@@ -2,7 +2,7 @@ import os,re
         
 REGEX_PICS='.*\\.(png|bmp|gif|ico|jpg|jpeg)'
 REGEX_SRC='.*<\\s*img\\s+(.*\\s+|)src='
-
+TAG_LINES=6
 PREFIX_FILE = 'image'
 PREFIX_DIR = 'folder'
         
@@ -43,7 +43,10 @@ def imgcomplete_on_complete(ed):
     if len(carets)!=1:
         return False
     x,y,x1,y2=carets[0]
-    s=ed.get_text_line(y)[:x]
+    s=''
+    for i in range(max(0,y-TAG_LINES),y):
+        s=s+ed.get_text_line(i)
+    s=s+ed.get_text_line(y)[:x]
     file_dir=os.path.dirname(ed.get_filename())
     if re.fullmatch(REGEX_SRC+'"[^"]*',s,re.I):
         try:
