@@ -1,6 +1,6 @@
 [info]
 title=HTML Completion
-desc=Handles auto-completion (Ctrl+Space) in HTML files. Shows auto-completion with filenames, when caret is inside value of <IMG> tag.
+desc=Handles auto-completion (Ctrl+Space) in HTML files. 1) Shows auto-completion with file names, when caret is inside <img src=""> tag. 2) Shows auto-completion with CSS class/id names, when caret is inside <sometag class=""> or <sometag id="">.
 type=cudatext-plugin
 subdir=cuda_html_completion
 homepage=https://github.com/Artem3213212/cuda_html_completion
