@@ -38,7 +38,10 @@ def get_floader_items(path,old_path,reg):
     return [s,z]
     
 def imgcomplete_on_complete(ed):
-    x,y,x1,y2=ed.get_carets()[0]
+    carets = ed.get_carets()
+    if len(carets)>1:
+        return False
+    x,y,x1,y2=carets[0]
     s=ed.get_text_line(y)[:x]
     file_dir=get_dir(ed.get_filename())
     if re.match('.*<\\s*img\\s+(.*\\s+|)src="[^"]*',s):
