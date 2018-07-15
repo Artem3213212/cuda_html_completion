@@ -36,7 +36,7 @@ def imgcomplete_on_complete(ed):
         try:
             for i in range(len(s)-1,-1,-1):
                 if s[i]=='"':
-                    temp=get_folder_items(file_dir,s[i+1:],'.*\\.(png|bmp)')
+                    temp=get_folder_items(file_dir,s[i+1:],'.*\\.(png|bmp|gif|ico|jpg|jpeg|PNG|BMP|GIF|ICO|JPG|JPEG)')
                     ed.complete(temp[0],temp[1],0)
                     return True
         except:
@@ -45,7 +45,7 @@ def imgcomplete_on_complete(ed):
         try:
             for i in range(len(s)-1,-1,-1):
                 if s[i]=="'":
-                    temp=get_folder_items(file_dir,s[i+1:],'.*\\.(png|bmp)')
+                    temp=get_folder_items(file_dir,s[i+1:],'.*\\.(png|bmp|gif|ico|jpg|jpeg|PNG|BMP|GIF|ICO|JPG|JPEG)')
                     ed.complete(temp[0],temp[1],0)
                     return True
         except:
