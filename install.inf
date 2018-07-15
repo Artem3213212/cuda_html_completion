@@ -1,0 +1,12 @@
+[info]
+title=HTML AutoComplete Filenames
+desc=Some description
+type=cudatext-plugin
+subdir=cuda_html_autocomplete
+homepage=
+$lex=regex:.*HTML.*|PHP
+
+[item1]
+section=events
+events=on_complete
+lexers=$lex
