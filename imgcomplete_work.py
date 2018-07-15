@@ -10,7 +10,7 @@ def get_folder_items(path,old_path,reg):
 
     s=os.path.dirname(old_path)
     start=os.path.basename(old_path)
-    z=len(start)
+    len1=len(start)
     if s=='':
         folder=path
     else:
@@ -36,7 +36,7 @@ def get_folder_items(path,old_path,reg):
         s=s+PREFIX_DIR+'|'+i+os.path.sep+chr(13)
     for i in l_files:
         s=s+PREFIX_FILE+'|'+i+chr(13)
-    return [s,z]
+    return [s,len1]
     
 def imgcomplete_on_complete(ed):
 
