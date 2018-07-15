@@ -17,7 +17,7 @@ def get_folder_items(path,old_path,reg):
         if i.is_dir():
             s=s+'|'+i.name+os.path.sep+chr(13)
         else:
-            if re.match(reg,i.name):
+            if re.fullmatch(reg,i.name):
                 s=s+'|'+i.name+chr(13)
     if('..'+os.path.sep).startswith(start):
         s='|..'+os.path.sep+chr(13)+s
@@ -32,7 +32,8 @@ def imgcomplete_on_complete(ed):
     x,y,x1,y2=carets[0]
     s=ed.get_text_line(y)[:x]
     file_dir=os.path.dirname(ed.get_filename())
-    if re.match('.*<\\s*img\\s+(.*\\s+|)src="[^"]*',s):
+    if re.fullmatch('.*<\\s*img\\s+(.*\\s+|)src="[^"]*',s):
+    #if re.fullmatch('.*<img\\s+([^<>]*\\s+|)src="[^\\"]*',s):
         try:
             for i in range(len(s)-1,-1,-1):
                 if s[i]=='"':
@@ -41,7 +42,8 @@ def imgcomplete_on_complete(ed):
                     return True
         except:
             pass
-    if re.match(".*<\\s*img\\s+(.*\\s+|)src='[^']*",s):
+    if re.fullmatch(".*<\\s*img\\s+(.*\\s+|)src='[^']*",s):
+    #if re.fullmatch(".*<img\\s+([^<>]*\\s+|)src='[^\\']*",s):
         try:
             for i in range(len(s)-1,-1,-1):
                 if s[i]=="'":
