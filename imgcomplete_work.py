@@ -42,14 +42,14 @@ def imgcomplete_on_complete(ed):
 
     carets=ed.get_carets()
     if len(carets)!=1:
-        return False
+        return
 
     fname=ed.get_filename()
     if not fname:
-        return False
+        return
     file_dir=os.path.dirname(fname)
     if not os.path.isdir(file_dir):
-        return False
+        return
         
     x,y,x1,y1=carets[0]
     s=''
@@ -79,6 +79,3 @@ def imgcomplete_on_complete(ed):
                         return True
         except:
             pass
-
-    return False
-    
