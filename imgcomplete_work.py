@@ -7,6 +7,7 @@ PREFIX_FILE = 'image'
 PREFIX_DIR = 'folder'
         
 def get_folder_items(path,old_path,reg):
+
     s=os.path.dirname(old_path)
     start=os.path.basename(old_path)
     z=len(start)
@@ -19,32 +20,36 @@ def get_folder_items(path,old_path,reg):
         folder='.'
     if not os.path.isdir(folder):
         return False
-    lsD=[]
-    lsF=[]
+    l_dirs=[]
+    l_files=[]
     for i in os.scandir(folder):
         if not i.name.startswith(start):
             continue
         if i.is_dir():
-            lsD.append(i.name) 
+            l_dirs.append(i.name) 
         elif re.fullmatch(reg,i.name,re.I):
-            lsF.append(i.name)
-    lsD.sort()
-    lsF.sort()
-    for i in lsD:
+            l_files.append(i.name)
+    l_dirs.sort()
+    l_files.sort()
+    for i in l_dirs:
         s=s+PREFIX_DIR+'|'+i+os.path.sep+chr(13)
-    for i in lsF:
+    for i in l_files:
         s=s+PREFIX_FILE+'|'+i+chr(13)
     if('..'+os.path.sep).startswith(start):
         s=PREFIX_DIR+'|..'+os.path.sep+chr(13)+s
     return [s,z]
     
 def imgcomplete_on_complete(ed):
+
     carets = ed.get_carets()
     if len(carets)!=1:
         return False
-    x,y,x1,y2=carets[0]
+    x,y,x1,y1=carets[0]
     s=ed.get_text_line(y)[:x]
     file_dir=os.path.dirname(ed.get_filename())
+    if not os.path.isdir(file_dir):
+        return False
+    
     if re.fullmatch(REGEX_SRC+'"[^"]*',s,re.I):
         try:
             for i in range(len(s)-1,-1,-1):
@@ -55,6 +60,7 @@ def imgcomplete_on_complete(ed):
                         return True
         except:
             pass
+
     if re.fullmatch(REGEX_SRC+"'[^']*",s,re.I):
         try:
             for i in range(len(s)-1,-1,-1):
@@ -65,4 +71,6 @@ def imgcomplete_on_complete(ed):
                         return True
         except:
             pass
+
     return False
+    
