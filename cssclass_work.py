@@ -4,9 +4,9 @@ import os
 from cudatext import *
 from . import csswork
 
-TEXT_CSS_CLASS = 'css_class'
-TEXT_CSS_ID = 'css_id'
-MSG_CSS_WORK = 'HTML Class Complete'
+TEXT_CSS_CLASS = 'class'
+TEXT_CSS_ID = 'id'
+MSG_CSS_WORK = 'HTML Completion'
 LOG = 0
 
 def is_word(s):
