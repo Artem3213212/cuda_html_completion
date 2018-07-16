@@ -1,10 +1,10 @@
 import os,re
         
-REGEX_PICS='.*\\.(png|bmp|gif|ico|jpg|jpeg)'
-REGEX_SRC='.*<\\s*img\\s+(.*\\s+|)src='
-TAG_LINES=6
+REGEX_PICS = r'.*\.(png|bmp|gif|ico|jpg|jpeg)'
+REGEX_SRC = r'.*<\s*img\s+(.*\s+|)src='
 PREFIX_FILE = 'image'
 PREFIX_DIR = 'folder'
+TAG_LINES = 6 # n lines is read above caret, to support complex tags
         
 def get_folder_items(path,old_path,reg):
 
