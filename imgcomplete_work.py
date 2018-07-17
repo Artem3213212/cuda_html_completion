@@ -6,6 +6,7 @@ REGEX_SRC = r'.*<\s*img\s+(.*\s+|)src='
 PREFIX_FILE = 'image'
 PREFIX_DIR = 'folder'
 TAG_LINES = 6 # n lines is read above caret, to support complex tags
+IS_UNIX = os.name=='posix'
 
 
 def get_pic_label(fn):
@@ -32,6 +33,8 @@ def get_folder_items(path,old_path,reg):
     l_dirs=[]
     l_files=[]
     for i in os.scandir(folder):
+        if IS_UNIX and i.name.startswith('.'):
+            continue
         if not i.name.startswith(start):
             continue
         if i.is_dir():
