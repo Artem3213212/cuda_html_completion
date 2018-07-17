@@ -40,15 +40,14 @@ def get_folder_items(path,old_path,reg):
         if i.is_dir():
             l_dirs.append(i.name) 
         elif re.fullmatch(reg,i.name,re.I):
-            l_files.append(i.name)
+            l_files.append((i.name, i.path))
     l_dirs.sort()
     l_files.sort()
     l_dirs.insert(0,'..')
     for i in l_dirs:
-        s=s+PREFIX_DIR+'|'+i+os.path.sep+chr(13)
-    for i in l_files:
-        info = get_pic_label(os.path.join(folder, i))
-        s=s+PREFIX_FILE+'|'+i+'|'+info+chr(13)
+        s+=PREFIX_DIR+'|'+i+os.path.sep+chr(13)
+    for (s_name, s_path) in l_files:
+        s+=PREFIX_FILE+'|'+s_name+'|'+get_pic_label(s_path)+chr(13)
     return [s,len1]
     
 def imgcomplete_on_complete(ed):
