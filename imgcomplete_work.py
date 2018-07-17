@@ -1,10 +1,19 @@
-import os,re
+import os, re
+from .imgsize import get_image_size
         
 REGEX_PICS = r'.*\.(png|bmp|gif|ico|jpg|jpeg)'
 REGEX_SRC = r'.*<\s*img\s+(.*\s+|)src='
 PREFIX_FILE = 'image'
 PREFIX_DIR = 'folder'
 TAG_LINES = 6 # n lines is read above caret, to support complex tags
+
+
+def get_pic_label(fn):
+    
+    res = get_image_size(fn)
+    if not res:
+        return '?'
+    return '%dx%d' % (res[0], res[1])
         
 def get_folder_items(path,old_path,reg):
 
@@ -35,7 +44,8 @@ def get_folder_items(path,old_path,reg):
     for i in l_dirs:
         s=s+PREFIX_DIR+'|'+i+os.path.sep+chr(13)
     for i in l_files:
-        s=s+PREFIX_FILE+'|'+i+chr(13)
+        info = get_pic_label(os.path.join(folder, i))
+        s=s+PREFIX_FILE+'|'+i+'|'+info+chr(13)
     return [s,len1]
     
 def imgcomplete_on_complete(ed):

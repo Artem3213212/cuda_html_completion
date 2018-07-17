@@ -1,4 +1,7 @@
 
+2018.07.17
++ added display of picture size NNxNN in completion listbox
+
 2018.07.16
 + merged two plugins: 
   old HTML Class Complete + 
