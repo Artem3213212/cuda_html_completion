@@ -10,14 +10,15 @@ def get_image_size(fname):
     head = fhandle.read(24)
     if len(head) != 24:
         return
-    if imghdr.what(fname) == 'png':
+    sig = imghdr.what(fname)
+    if sig == 'png':
         check = struct.unpack('>i', head[4:8])[0]
         if check != 0x0d0a1a0a:
             return
         width, height = struct.unpack('>ii', head[16:24])
-    elif imghdr.what(fname) == 'gif':
+    elif sig == 'gif':
         width, height = struct.unpack('<HH', head[6:10])
-    elif imghdr.what(fname) == 'jpeg':
+    elif sig == 'jpeg':
         try:
             fhandle.seek(0) # Read 0xff next
             size = 2
@@ -34,7 +35,7 @@ def get_image_size(fname):
             height, width = struct.unpack('>HH', fhandle.read(4))
         except Exception: #IGNORE:W0703
             return
-    elif imghdr.what(fname)=='bmp': 
+    elif sig=='bmp': 
         fhandle.seek(18)
         width=int.from_bytes(fhandle.read(4),byteorder='little')
         height=int.from_bytes(fhandle.read(4),byteorder='little')
