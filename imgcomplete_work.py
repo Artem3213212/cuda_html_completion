@@ -50,6 +50,12 @@ def get_folder_items(path,old_path,reg):
     for (s_name, s_path) in l_files:
         s+=PREFIX_FILE+'|'+s_name+'|'+get_pic_label(s_path)+chr(13)
     return [s,len1]
+
+def get_end(s):
+    for i in range(len(s)):
+        if s[i] in ['"',"'",'<','>','']:
+            return i
+    return len(s)-1
     
 def imgcomplete_on_complete(ed):
 
@@ -76,7 +82,7 @@ def imgcomplete_on_complete(ed):
             if s[i]=='"':
                 temp=get_folder_items(file_dir,s[i+1:],REGEX_PICS)
                 if temp:
-                    ed.complete(temp[0],temp[1],0)
+                    ed.complete(temp[0],temp[1],get_end(ed.get_text_line(y)[x:]))
                     return True
 
     if re.fullmatch(REGEX_SRC+"'[^']*",s,re.I):
@@ -84,5 +90,5 @@ def imgcomplete_on_complete(ed):
             if s[i]=="'":
                 temp=get_folder_items(file_dir,s[i+1:],REGEX_PICS)
                 if temp:
-                    ed.complete(temp[0],temp[1],0)
+                    ed.complete(temp[0],temp[1],get_end(ed.get_text_line(y)[x:]))
                     return True
