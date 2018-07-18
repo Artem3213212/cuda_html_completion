@@ -2,7 +2,7 @@ import os, re
 from .imgsize import get_image_size
         
 REGEX_PICS = r'.*\.(png|bmp|gif|ico|jpg|jpeg)'
-REGEX_SRC = r'.*<\s*img\s+(.*\s+|)src='
+REGEX_SRC = r'.*<\s*img\s+([^<>]*\s+|)src='
 PREFIX_FILE = 'image'
 PREFIX_DIR = 'folder'
 TAG_LINES = 6 # n lines is read above caret, to support complex tags
