@@ -75,14 +75,15 @@ def imgcomplete_on_complete(ed):
     # add n prev lines, support complex tags
     for i in range(max(0,y-TAG_LINES),y):
         s+=ed.get_text_line(i)
-    s+=ed.get_text_line(y)[:x]
+    s_last=ed.get_text_line(y) 
+    s+=s_last[:x]
     
     if re.fullmatch(REGEX_SRC+'"[^"]*',s,re.I):
         for i in range(len(s)-1,-1,-1):
             if s[i]=='"':
                 temp=get_folder_items(file_dir,s[i+1:],REGEX_PICS)
                 if temp:
-                    ed.complete(temp[0],temp[1],get_end(ed.get_text_line(y)[x:]))
+                    ed.complete(temp[0],temp[1],get_end(s_last[x:]))
                     return True
 
     if re.fullmatch(REGEX_SRC+"'[^']*",s,re.I):
@@ -90,5 +91,5 @@ def imgcomplete_on_complete(ed):
             if s[i]=="'":
                 temp=get_folder_items(file_dir,s[i+1:],REGEX_PICS)
                 if temp:
-                    ed.complete(temp[0],temp[1],get_end(ed.get_text_line(y)[x:]))
+                    ed.complete(temp[0],temp[1],get_end(s_last[x:]))
                     return True
