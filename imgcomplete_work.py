@@ -80,17 +80,15 @@ def imgcomplete_on_complete(ed):
     len2=get_end(s_last[x:]) # chars righter than caret
 
     if re.fullmatch(REGEX_SRC+'"[^"]*',s,re.I):
-        for i in range(len(s)-1,-1,-1):
-            if s[i]=='"':
-                temp=get_folder_items(file_dir,s[i+1:],REGEX_PICS)
-                if temp:
-                    ed.complete(temp[0],temp[1],len2)
-                    return True
+        val=s[s.rfind('"')+1:]
+        temp=get_folder_items(file_dir,val,REGEX_PICS)
+        if temp:
+            ed.complete(temp[0],temp[1],len2)
+            return True
 
     if re.fullmatch(REGEX_SRC+"'[^']*",s,re.I):
-        for i in range(len(s)-1,-1,-1):
-            if s[i]=="'":
-                temp=get_folder_items(file_dir,s[i+1:],REGEX_PICS)
-                if temp:
-                    ed.complete(temp[0],temp[1],len2)
-                    return True
+        val=s[s.rfind("'")+1:]
+        temp=get_folder_items(file_dir,val,REGEX_PICS)
+        if temp:
+            ed.complete(temp[0],temp[1],len2)
+            return True
