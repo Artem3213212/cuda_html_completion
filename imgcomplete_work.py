@@ -12,9 +12,10 @@ IS_UNIX = os.name=='posix'
 def get_pic_label(fn):
     
     res = get_image_size(fn)
-    if not res:
+    if res:
+        return '%dx%d'%res
+    else:
         return '?'
-    return '%dx%d' % (res[0], res[1])
         
 def get_folder_items(path,old_path,reg):
 
